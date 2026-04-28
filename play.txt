@@ -11,14 +11,38 @@ Movie,Gladiator,https://www.imdb.com/title/tt0172495/,https://www.playimdb.com/t
 Movie,Forrest Gump,https://www.imdb.com/title/tt0109830/,https://www.playimdb.com/title/tt0109830/
 Movie,The Shawshank Redemption,https://www.imdb.com/title/tt0111161/,https://www.playimdb.com/title/tt0111161/
 Movie,The Godfather,https://www.imdb.com/title/tt0068646/,https://www.playimdb.com/title/tt0068646/
+Movie,The Godfather Part II,https://www.imdb.com/title/tt0071562/,https://www.playimdb.com/title/tt0071562/
 Movie,Pulp Fiction,https://www.imdb.com/title/tt0110912/,https://www.playimdb.com/title/tt0110912/
 Movie,Fight Club,https://www.imdb.com/title/tt0137523/,https://www.playimdb.com/title/tt0137523/
+Movie,The Social Network,https://www.imdb.com/title/tt1285016/,https://www.playimdb.com/title/tt1285016/
 Movie,Parasite,https://www.imdb.com/title/tt6751668/,https://www.playimdb.com/title/tt6751668/
 Movie,Whiplash,https://www.imdb.com/title/tt2582802/,https://www.playimdb.com/title/tt2582802/
 Movie,La La Land,https://www.imdb.com/title/tt3783958/,https://www.playimdb.com/title/tt3783958/
 Movie,The Lion King,https://www.imdb.com/title/tt0110357/,https://www.playimdb.com/title/tt0110357/
 Movie,Frozen,https://www.imdb.com/title/tt2294629/,https://www.playimdb.com/title/tt2294629/
 Movie,Toy Story,https://www.imdb.com/title/tt0114709/,https://www.playimdb.com/title/tt0114709/
+Movie,Up,https://www.imdb.com/title/tt1049413/,https://www.playimdb.com/title/tt1049413/
+Movie,Inside Out,https://www.imdb.com/title/tt2096673/,https://www.playimdb.com/title/tt2096673/
+Movie,Coco,https://www.imdb.com/title/tt2380307/,https://www.playimdb.com/title/tt2380307/
+Movie,Spider-Man: No Way Home,https://www.imdb.com/title/tt10872600/,https://www.playimdb.com/title/tt10872600/
+Movie,Black Panther,https://www.imdb.com/title/tt1825683/,https://www.playimdb.com/title/tt1825683/
+Movie,Doctor Strange,https://www.imdb.com/title/tt1211837/,https://www.playimdb.com/title/tt1211837/
+Movie,Iron Man,https://www.imdb.com/title/tt0371746/,https://www.playimdb.com/title/tt0371746/
+Movie,Thor,https://www.imdb.com/title/tt0800369/,https://www.playimdb.com/title/tt0800369/
+Movie,Captain America: Civil War,https://www.imdb.com/title/tt3498820/,https://www.playimdb.com/title/tt3498820/
+Movie,Deadpool,https://www.imdb.com/title/tt1431045/,https://www.playimdb.com/title/tt1431045/
+Movie,Logan,https://www.imdb.com/title/tt3315342/,https://www.playimdb.com/title/tt3315342/
+Movie,The Batman,https://www.imdb.com/title/tt1877830/,https://www.playimdb.com/title/tt1877830/
+Movie,Dune,https://www.imdb.com/title/tt1160419/,https://www.playimdb.com/title/tt1160419/
+Movie,Blade Runner 2049,https://www.imdb.com/title/tt1856101/,https://www.playimdb.com/title/tt1856101/
+Movie,Arrival,https://www.imdb.com/title/tt2543164/,https://www.playimdb.com/title/tt2543164/
+Movie,Gravity,https://www.imdb.com/title/tt1454468/,https://www.playimdb.com/title/tt1454468/
+Movie,The Revenant,https://www.imdb.com/title/tt1663202/,https://www.playimdb.com/title/tt1663202/
+Movie,Birdman,https://www.imdb.com/title/tt2562232/,https://www.playimdb.com/title/tt2562232/
+Movie,1917,https://www.imdb.com/title/tt8579674/,https://www.playimdb.com/title/tt8579674/
+Movie,Skyfall,https://www.imdb.com/title/tt1074638/,https://www.playimdb.com/title/tt1074638/
+Movie,No Time to Die,https://www.imdb.com/title/tt2382320/,https://www.playimdb.com/title/tt2382320/
+Movie,Top Gun: Maverick,https://www.imdb.com/title/tt1745960/,https://www.playimdb.com/title/tt1745960/
 
 Series,Breaking Bad,https://www.imdb.com/title/tt0903747/,https://www.playimdb.com/title/tt0903747/
 Series,Game of Thrones,https://www.imdb.com/title/tt0944947/,https://www.playimdb.com/title/tt0944947/
@@ -30,3 +54,13 @@ Series,Sherlock,https://www.imdb.com/title/tt1475582/,https://www.playimdb.com/t
 Series,Dark,https://www.imdb.com/title/tt5753856/,https://www.playimdb.com/title/tt5753856/
 Series,The Boys,https://www.imdb.com/title/tt1190634/,https://www.playimdb.com/title/tt1190634/
 Series,Loki,https://www.imdb.com/title/tt9140554/,https://www.playimdb.com/title/tt9140554/
+Series,WandaVision,https://www.imdb.com/title/tt9140560/,https://www.playimdb.com/title/tt9140560/
+Series,House of the Dragon,https://www.imdb.com/title/tt11198330/,https://www.playimdb.com/title/tt11198330/
+Series,Narcos,https://www.imdb.com/title/tt2707408/,https://www.playimdb.com/title/tt2707408/
+Series,Peaky Blinders,https://www.imdb.com/title/tt2442560/,https://www.playimdb.com/title/tt2442560/
+Series,The Witcher,https://www.imdb.com/title/tt5180504/,https://www.playimdb.com/title/tt5180504/
+Series,Wednesday,https://www.imdb.com/title/tt13443470/,https://www.playimdb.com/title/tt13443470/
+Series,Mirzapur,https://www.imdb.com/title/tt6473300/,https://www.playimdb.com/title/tt6473300/
+Series,Scam 1992,https://www.imdb.com/title/tt12392504/,https://www.playimdb.com/title/tt12392504/
+Series,Asur,https://www.imdb.com/title/tt11912196/,https://www.playimdb.com/title/tt11912196/
+Series,Delhi Crime,https://www.imdb.com/title/tt9398466/,https://www.playimdb.com/title/tt9398466/
