@@ -3,61 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Detail - OTT Platform</title>
+    <title>Watch Content - OTT Platform</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="bg-dark text-white">
     <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold text-danger" href="/">OTT PLATFORM</a>
+            <a class="navbar-brand fw-bold" href="/">OTT PLATFORM</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="/">Browse</a></li>
                     <li class="nav-item"><a class="nav-link" href="/subscription">Subscription</a></li>
                     <li id="auth-links" class="d-flex align-items-center">
                         <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link btn btn-danger btn-sm ms-lg-3 px-3" href="/register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link btn-netflix btn-sm ms-lg-3 px-3" href="/register">Join</a></li>
                     </li>
                     <li id="user-links" class="d-flex align-items-center" style="display:none !important;">
                         <li class="nav-item"><span class="nav-link text-light me-2 small fw-bold" id="user-display"></span></li>
-                        <li class="nav-item"><button class="btn btn-outline-light btn-sm ms-lg-2" onclick="logout()">Logout</button></li>
+                        <li class="nav-item"><button class="btn btn-outline-light btn-sm ms-lg-2 rounded-0" onclick="logout()">Sign Out</button></li>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container py-5">
-        <div id="content-detail" class="row">
-            <!-- Details will be loaded here -->
-        </div>
-
-        <div class="mt-5">
-            <h3>User Reviews</h3>
-            <div id="reviews-list" class="list-group bg-dark">
-                <!-- Reviews will be loaded here -->
-            </div>
-            
-            <div id="review-form-container" class="mt-4 p-4 border border-secondary rounded">
-                <h4>Leave a Review</h4>
-                <form id="reviewForm">
-                    <input type="hidden" id="watchId" name="WatchID">
-                    <div class="mb-3">
-                        <label class="form-label">Score (1-10)</label>
-                        <input type="number" step="0.1" min="1" max="10" name="Score" class="form-control bg-dark text-white" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Comment</label>
-                        <textarea name="Comment" class="form-control bg-dark text-white" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-danger">Submit Review</button>
-                </form>
-                <p id="watch-notice" class="text-warning mt-2 small" style="display:none;">You need to watch this content first to review it.</p>
+    <div id="content-hero" class="py-5 position-relative" style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
+        <div class="container">
+            <div id="content-detail" class="row align-items-center py-5">
+                <!-- Details loaded via JS -->
+                <div class="text-center py-5">
+                    <div class="spinner-border text-danger" role="status"></div>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <h3 class="section-title mb-4">Reviews & Feedback</h3>
+                <div id="reviews-list" class="mb-5">
+                    <!-- Reviews will be loaded here -->
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div id="review-form-container" class="glass-card p-4 sticky-top" style="top: 100px;">
+                    <h4 class="fw-bold mb-4">Post a Review</h4>
+                    <form id="reviewForm">
+                        <input type="hidden" id="watchId" name="WatchID">
+                        <div class="mb-4">
+                            <label class="form-label small text-muted text-uppercase fw-bold">Rating Score</label>
+                            <div class="d-flex align-items-center">
+                                <input type="range" class="form-range flex-grow-1 me-3" min="1" max="10" step="0.5" id="scoreRange" name="Score" oninput="this.nextElementSibling.value = this.value">
+                                <output class="fw-bold text-danger fs-4">5.5</output>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small text-muted text-uppercase fw-bold">Comment</label>
+                            <textarea name="Comment" class="form-control bg-dark text-white border-secondary" rows="4" placeholder="Tell us what you thought..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-netflix w-100 py-3 fw-bold">Submit Review</button>
+                    </form>
+                    <div id="watch-notice" class="mt-4 p-3 bg-danger bg-opacity-10 border border-danger border-opacity-25 rounded text-danger small" style="display:none;">
+                        <i class="fas fa-info-circle me-2"></i> You must start watching this content before you can leave a review.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const contentId = window.location.pathname.split('/').pop();
 
@@ -91,54 +108,81 @@
             
             let extra = '';
             if (c.Content_Type === 'Movie') {
-                extra = `<p><strong>Director:</strong> ${c.Director}</p>
-                         <p><strong>Cast:</strong> ${c.Cast}</p>`;
+                extra = `
+                    <div class="row g-3 mb-4">
+                        <div class="col-6"><p class="small mb-1 text-muted">DIRECTOR</p><p class="fw-bold">${c.Director}</p></div>
+                        <div class="col-6"><p class="small mb-1 text-muted">BOX OFFICE</p><p class="fw-bold">$${(c.Box_Office/1000000).toFixed(1)}M</p></div>
+                        <div class="col-12"><p class="small mb-1 text-muted">CAST</p><p class="fw-bold">${c.Cast}</p></div>
+                    </div>
+                `;
             } else {
-                extra = `<p><strong>Seasons:</strong> ${c.Seasons}</p>
-                         <h6>Episodes:</h6>
-                         <ul class="list-group list-group-flush bg-dark mb-3">
-                            ${c.Episodes.map(e => `<li class="list-group-item bg-dark text-white border-secondary">S${e.Season} E${e.Number}: ${e.Title} (${e.Duration}m)</li>`).join('')}
-                         </ul>`;
+                extra = `
+                    <div class="mb-4">
+                        <p class="small mb-3 text-muted">EPISODES (${c.Seasons} SEASONS)</p>
+                        <div class="list-group list-group-flush rounded overflow-hidden shadow-sm">
+                            ${c.Episodes.map(e => `
+                                <div class="list-group-item bg-dark bg-opacity-50 text-white border-secondary d-flex justify-content-between align-items-center">
+                                    <span class="small"><span class="text-danger fw-bold me-2">S${e.Season} E${e.Number}</span> ${e.Title}</span>
+                                    <span class="smaller opacity-50">${e.Duration}m</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
             }
 
             detail.innerHTML = `
-                <div class="col-md-5">
-                    <div class="p-5 bg-secondary text-center rounded shadow-lg">
-                        <h1 class="display-1">🎬</h1>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <h1 class="display-4 fw-bold">${c.Title}</h1>
-                    <p class="lead mb-4">
-                        <span class="badge bg-warning text-dark">★ ${c.Rating}</span>
-                        <span class="badge bg-danger ms-1">${c.Content_Type}</span>
-                        <span class="ms-2 text-secondary">${c.Release_Year} | ${c.Duration} mins</span>
-                    </p>
-                    <p class="mb-1"><strong>Genres:</strong> <span class="text-info">${c.Genres.join(', ')}</span></p>
-                    <p class="mb-4"><strong>Languages:</strong> <span class="text-info">${c.Languages.join(', ')}</span></p>
-                    <div class="card bg-black border-secondary mb-4">
-                        <div class="card-body">
-                            ${extra}
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="poster-card" style="max-width: 350px; margin: auto;">
+                        <div class="poster-img" style="aspect-ratio: 2/3; font-size: 5rem;">
+                            <i class="fas fa-play text-white opacity-25"></i>
                         </div>
                     </div>
-                    <button onclick="startWatching()" class="btn btn-danger btn-lg px-5 fw-bold shadow">Watch Now</button>
+                </div>
+                <div class="col-lg-8">
+                    <div class="ps-lg-4">
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="badge bg-danger rounded-1 p-2 px-3 fw-bold">${c.Content_Type}</span>
+                            <span class="badge bg-warning text-dark rounded-1 p-2 px-3 fw-bold"><i class="fas fa-star me-1"></i>${c.Rating}</span>
+                        </div>
+                        <h1 class="display-3 fw-bold mb-3">${c.Title}</h1>
+                        <p class="lead text-muted mb-4 fs-5">
+                            ${c.Release_Year} • ${c.Duration} mins • ${c.Genres.join(' / ')}
+                        </p>
+                        
+                        <div class="mb-4 pb-2 border-bottom border-secondary border-opacity-25">
+                            <p class="mb-1 small text-muted">AVAILABLE IN</p>
+                            <div class="d-flex gap-2">
+                                ${c.Languages.map(l => `<span class="badge bg-secondary bg-opacity-25 fw-normal">${l}</span>`).join('')}
+                            </div>
+                        </div>
+
+                        ${extra}
+                        
+                        <div class="d-flex gap-3 mt-5">
+                            <button onclick="startWatching()" class="btn btn-netflix btn-lg px-5 fs-4"><i class="fas fa-play me-2"></i> WATCH NOW</button>
+                            <button class="btn btn-outline-light btn-lg rounded-circle" style="width: 56px; height: 56px;"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
                 </div>
             `;
 
             const reviewsList = document.getElementById('reviews-list');
             if (c.Reviews && c.Reviews.length > 0) {
                 reviewsList.innerHTML = c.Reviews.map(r => `
-                    <div class="list-group-item bg-dark text-white border-secondary mb-2 rounded">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1 fw-bold">${r.User}</h6>
-                            <span class="badge bg-warning text-dark">★ ${r.Score}</span>
+                    <div class="glass-card p-4 mb-3 border-start border-danger border-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h6 class="fw-bold mb-0">${r.User}</h6>
+                                <small class="text-muted">${r.Date}</small>
+                            </div>
+                            <span class="badge bg-warning text-dark"><i class="fas fa-star me-1"></i>${r.Score}</span>
                         </div>
-                        <p class="mb-1 small opacity-75">${r.Comment}</p>
-                        <small class="text-secondary">${r.Date}</small>
+                        <p class="mb-0 opacity-75">${r.Comment}</p>
                     </div>
                 `).join('');
             } else {
-                reviewsList.innerHTML = '<p class="text-secondary italic">No reviews yet. Be the first to review!</p>';
+                reviewsList.innerHTML = '<div class="text-center py-5 opacity-50"><i class="far fa-comment-dots fs-1 mb-3"></i><p>No reviews yet. Start the conversation!</p></div>';
             }
         }
 
@@ -163,7 +207,9 @@
                 const data = await res.json();
                 document.getElementById('watchId').value = data.WatchID;
                 document.getElementById('watch-notice').style.display = 'none';
-                alert('Enjoy watching! The review form below is now active.');
+                
+                // Show a mini-player placeholder
+                alert('Enjoy watching! Content is now playing in the background.');
             } else {
                 alert('Error starting watch session');
             }
@@ -193,7 +239,6 @@
             });
 
             if (res.ok) {
-                alert('Review submitted! Content rating updated.');
                 e.target.reset();
                 document.getElementById('watchId').value = ''; 
                 loadDetail();

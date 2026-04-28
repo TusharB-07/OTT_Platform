@@ -1,0 +1,110 @@
+Type,Title,Year,Director/Creator,Cast,BoxOffice(USD),Duration(min),Genres
+Movie,Inception,2010,Christopher Nolan,Leonardo DiCaprio|Joseph Gordon-Levitt,836000000,148,Action
+Movie,The Dark Knight,2008,Christopher Nolan,Christian Bale|Heath Ledger,1005000000,152,Action
+Movie,Interstellar,2014,Christopher Nolan,Matthew McConaughey|Anne Hathaway,677000000,169,Sci-Fi
+Movie,Titanic,1997,James Cameron,Leonardo DiCaprio|Kate Winslet,2200000000,195,Romance
+Movie,Avatar,2009,James Cameron,Sam Worthington|Zoe Saldana,2920000000,162,Sci-Fi
+Movie,Avengers: Endgame,2019,Russo Brothers,Robert Downey Jr.|Chris Evans,2798000000,181,Action
+Movie,Joker,2019,Todd Phillips,Joaquin Phoenix,1074000000,122,Drama
+Movie,The Matrix,1999,Wachowski Sisters,Keanu Reeves,467000000,136,Sci-Fi
+Movie,Gladiator,2000,Ridley Scott,Russell Crowe,460000000,155,Action
+Movie,Forrest Gump,1994,Robert Zemeckis,Tom Hanks,678000000,142,Drama
+Movie,The Shawshank Redemption,1994,Frank Darabont,Tim Robbins|Morgan Freeman,28341469,142,Drama
+Movie,The Godfather,1972,Francis Ford Coppola,Marlon Brando|Al Pacino,246000000,175,Crime
+Movie,The Godfather Part II,1974,Francis Ford Coppola,Al Pacino|Robert De Niro,48000000,202,Crime
+Movie,Pulp Fiction,1994,Quentin Tarantino,John Travolta|Samuel L. Jackson,213900000,154,Crime
+Movie,Fight Club,1999,David Fincher,Brad Pitt|Edward Norton,101200000,139,Drama
+Movie,The Social Network,2010,David Fincher,Jesse Eisenberg,224900000,120,Drama
+Movie,Parasite,2019,Bong Joon-ho,Song Kang-ho,258000000,132,Thriller
+Movie,Whiplash,2014,Damien Chazelle,Miles Teller|J.K. Simmons,49000000,106,Drama
+Movie,La La Land,2016,Damien Chazelle,Ryan Gosling|Emma Stone,446000000,128,Romance
+Movie,The Lion King,1994,Roger Allers,Matthew Broderick,968000000,88,Animation
+Movie,Frozen,2013,Chris Buck,Kristen Bell,1280000000,102,Animation
+Movie,Toy Story,1995,John Lasseter,Tom Hanks|Tim Allen,373000000,81,Animation
+Movie,Up,2009,Pete Docter,Ed Asner,735000000,96,Animation
+Movie,Inside Out,2015,Pete Docter,Amy Poehler,858000000,95,Animation
+Movie,Coco,2017,Lee Unkrich,Anthony Gonzalez,807000000,105,Animation
+Movie,Spider-Man: No Way Home,2021,Jon Watts,Tom Holland,1900000000,148,Action
+Movie,Black Panther,2018,Ryan Coogler,Chadwick Boseman,1347000000,134,Action
+Movie,Doctor Strange,2016,Scott Derrickson,Benedict Cumberbatch,677000000,115,Action
+Movie,Iron Man,2008,Jon Favreau,Robert Downey Jr.,585000000,126,Action
+Movie,Thor,2011,Kenneth Branagh,Chris Hemsworth,449000000,115,Action
+Movie,Captain America: Civil War,2016,Russo Brothers,Chris Evans,1153000000,147,Action
+Movie,Deadpool,2016,Tim Miller,Ryan Reynolds,782000000,108,Comedy
+Movie,Logan,2017,James Mangold,Hugh Jackman,619000000,137,Action
+Movie,The Batman,2022,Matt Reeves,Robert Pattinson,770000000,176,Action
+Movie,Dune,2021,Denis Villeneuve,Timothee Chalamet,402000000,155,Sci-Fi
+Movie,Blade Runner 2049,2017,Denis Villeneuve,Ryan Gosling,259000000,164,Sci-Fi
+Movie,Arrival,2016,Denis Villeneuve,Amy Adams,203000000,116,Sci-Fi
+Movie,Gravity,2013,Alfonso Cuaron,Sandra Bullock,723000000,91,Sci-Fi
+Movie,The Revenant,2015,Alejandro Inarritu,Leonardo DiCaprio,533000000,156,Drama
+Movie,Birdman,2014,Alejandro Inarritu,Michael Keaton,103000000,119,Drama
+Movie,1917,2019,Sam Mendes,George MacKay,384000000,119,War
+Movie,Skyfall,2012,Sam Mendes,Daniel Craig,1108000000,143,Action
+Movie,No Time to Die,2021,Cary Fukunaga,Daniel Craig,774000000,163,Action
+Movie,Top Gun: Maverick,2022,Joseph Kosinski,Tom Cruise,1495000000,131,Action
+Movie,Jurassic Park,1993,Steven Spielberg,Sam Neill,1040000000,127,Adventure
+Movie,Jaws,1975,Steven Spielberg,Roy Scheider,470000000,124,Thriller
+Movie,E.T.,1982,Steven Spielberg,Henry Thomas,792000000,115,Sci-Fi
+Movie,Schindler's List,1993,Steven Spielberg,Liam Neeson,322000000,195,Drama
+Movie,The Avengers,2012,Joss Whedon,Robert Downey Jr.,1518000000,143,Action
+Movie,Guardians of the Galaxy,2014,James Gunn,Chris Pratt,773000000,121,Action
+Movie,Shrek,2001,Andrew Adamson,Mike Myers,487000000,90,Animation
+Movie,Despicable Me,2010,Pierre Coffin,Steve Carell,543000000,95,Animation
+Movie,Minions,2015,Kyle Balda,Steve Carell,1159000000,91,Animation
+Movie,Harry Potter 1,2001,Chris Columbus,Daniel Radcliffe,1002000000,152,Fantasy
+Movie,Harry Potter 8,2011,David Yates,Daniel Radcliffe,1342000000,130,Fantasy
+Movie,Fantastic Beasts,2016,David Yates,Eddie Redmayne,814000000,133,Fantasy
+Movie,The Hunger Games,2012,Gary Ross,Jennifer Lawrence,694000000,142,Action
+Movie,Catching Fire,2013,Francis Lawrence,Jennifer Lawrence,865000000,146,Action
+Movie,Mockingjay Part 2,2015,Francis Lawrence,Jennifer Lawrence,653000000,137,Action
+Movie,The Conjuring,2013,James Wan,Vera Farmiga,320000000,112,Horror
+Movie,It,2017,Andy Muschietti,Bill Skarsgard,701000000,135,Horror
+Movie,Get Out,2017,Jordan Peele,Daniel Kaluuya,255000000,104,Horror
+Movie,Us,2019,Jordan Peele,Lupita Nyongo,255000000,116,Horror
+Movie,A Quiet Place,2018,John Krasinski,Emily Blunt,341000000,90,Horror
+Movie,The Nun,2018,Corin Hardy,Taissa Farmiga,365000000,96,Horror
+Movie,Fast Five,2011,Justin Lin,Vin Diesel,626000000,130,Action
+Movie,Furious 7,2015,James Wan,Vin Diesel,1516000000,137,Action
+Movie,Fast X,2023,Louis Leterrier,Vin Diesel,700000000,141,Action
+Movie,John Wick,2014,Chad Stahelski,Keanu Reeves,86000000,101,Action
+Movie,John Wick 4,2023,Chad Stahelski,Keanu Reeves,440000000,169,Action
+Movie,Mission Impossible Fallout,2018,Christopher McQuarrie,Tom Cruise,791000000,147,Action
+Movie,Edge of Tomorrow,2014,Doug Liman,Tom Cruise,370000000,113,Sci-Fi
+Movie,The Prestige,2006,Christopher Nolan,Hugh Jackman,109000000,130,Drama
+Movie,Memento,2000,Christopher Nolan,Guy Pearce,40000000,113,Thriller
+Movie,Dunkirk,2017,Christopher Nolan,Tom Hardy,527000000,106,War
+Movie,Tenet,2020,Christopher Nolan,John David Washington,365000000,150,Sci-Fi
+Movie,Oppenheimer,2023,Christopher Nolan,Cillian Murphy,950000000,180,Drama
+Movie,Slumdog Millionaire,2008,Danny Boyle,Dev Patel,378000000,120,Drama
+Movie,RRR,2022,S.S. Rajamouli,Ram Charan|NTR Jr.,160000000,182,Action
+Movie,Baahubali 2,2017,S.S. Rajamouli,Prabhas,181000000,167,Action
+Movie,Dangal,2016,Nitesh Tiwari,Aamir Khan,311000000,161,Drama
+Movie,3 Idiots,2009,Rajkumar Hirani,Aamir Khan,400000000,170,Comedy
+Movie,PK,2014,Rajkumar Hirani,Aamir Khan,854000000,153,Comedy
+Movie,Andhadhun,2018,Sriram Raghavan,Ayushmann Khurrana,63000000,139,Thriller
+Movie,Drishyam,2015,Nishikant Kamat,Ajay Devgn,110000000,163,Thriller
+Movie,KGF Chapter 2,2022,Prashanth Neel,Yash,1200000000,168,Action
+Movie,Pushpa,2021,Sukumar,Allu Arjun,350000000,179,Action
+Movie,Vikram,2022,Lokesh Kanagaraj,Kamal Haasan,500000000,175,Action
+
+Series,Breaking Bad,2008,Vince Gilligan,Bryan Cranston,,47,Crime
+Series,Game of Thrones,2011,David Benioff,Emilia Clarke,,57,Fantasy
+Series,Stranger Things,2016,Duffer Brothers,Millie Bobby Brown,,50,Sci-Fi
+Series,Money Heist,2017,Alex Pina,Alvaro Morte,,50,Crime
+Series,The Office,2005,Greg Daniels,Steve Carell,,22,Comedy
+Series,Friends,1994,David Crane,Jennifer Aniston,,22,Comedy
+Series,Sherlock,2010,Mark Gatiss,Benedict Cumberbatch,,90,Crime
+Series,Dark,2017,Baran bo Odar,Louis Hofmann,,60,Sci-Fi
+Series,The Boys,2019,Eric Kripke,Karl Urban,,60,Action
+Series,Loki,2021,Michael Waldron,Tom Hiddleston,,50,Action
+Series,WandaVision,2021,Jac Schaeffer,Elizabeth Olsen,,50,Drama
+Series,House of the Dragon,2022,Ryan Condal,Matt Smith,,60,Fantasy
+Series,Narcos,2015,Chris Brancato,Wagner Moura,,50,Crime
+Series,Peaky Blinders,2013,Steven Knight,Cillian Murphy,,60,Crime
+Series,The Witcher,2019,Lauren Schmidt,Henry Cavill,,60,Fantasy
+Series,Wednesday,2022,Alfred Gough,Jenna Ortega,,45,Comedy
+Series,Mirzapur,2018,Karan Anshuman,Pankaj Tripathi,,50,Crime
+Series,Scam 1992,2020,Hansal Mehta,Pratik Gandhi,,50,Drama
+Series,Asur,2020,Oni Sen,Arshad Warsi,,45,Thriller
+Series,Delhi Crime,2019,Richie Mehta,Shefali Shah,,50,Crime

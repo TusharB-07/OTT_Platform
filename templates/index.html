@@ -3,121 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTT Streaming Platform</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>OTT Streaming - Unlimited Movies & TV Shows</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body class="bg-dark text-white d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm sticky-top">
+<body class="bg-dark text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand fw-bold text-danger" href="/">OTT PLATFORM</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand fw-bold" href="/">OTT PLATFORM</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="/">Browse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/subscription">Subscription</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="/">Browse</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="/subscription">Subscription</a></li>
                     
                     <!-- Guest Links -->
-                    <li class="nav-item guest-link"><a class="nav-link" href="/login">Login</a></li>
-                    <li class="nav-item guest-link"><a class="nav-link btn btn-danger btn-sm ms-lg-3 px-3" href="/register">Register</a></li>
+                    <li class="nav-item guest-link"><a class="nav-link px-3" href="/login">Login</a></li>
+                    <li class="nav-item guest-link"><a class="nav-link btn-netflix ms-lg-3" href="/register">Join Now</a></li>
                     
                     <!-- User Links -->
                     <li class="nav-item user-link d-none">
                         <span class="nav-link text-light me-2 small fw-bold" id="user-display"></span>
                     </li>
                     <li class="nav-item user-link d-none">
-                        <button class="btn btn-outline-light btn-sm ms-lg-2" onclick="logout()">Logout</button>
+                        <button class="btn btn-outline-light btn-sm ms-lg-2 rounded-0 px-3" onclick="logout()">Sign Out</button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header id="hero-section" class="py-5 text-center bg-dark position-relative overflow-hidden" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
-        <div class="container py-5">
-            <h1 class="display-3 fw-bold mb-3">Unlimited Movies, TV <br>Shows, and More.</h1>
-            <p class="lead mb-4 fs-4">Watch anywhere. Cancel anytime.</p>
-            <div class="mt-4 justify-content-center d-flex gap-2">
-                <input type="email" id="start-email" class="form-control form-control-lg w-auto border-0" placeholder="Email address">
-                <button class="btn btn-danger btn-lg px-4 fw-bold" onclick="getStarted()">Get Started &gt;</button>
+    <header id="hero-section" class="vh-100 position-relative overflow-hidden" style="background: url('https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
+        <div class="hero-gradient d-flex align-items-center">
+            <div class="container hero-content text-center text-lg-start">
+                <h1 class="display-2 fw-bold mb-3 mt-5">Unlimited Movies, <br>TV Shows, & More.</h1>
+                <p class="lead mb-4 fs-4 opacity-75">Watch anywhere. Cancel anytime.</p>
+                <div class="mt-5 d-flex flex-column flex-md-row gap-2 justify-content-center justify-content-lg-start">
+                    <div class="input-group input-group-lg" style="max-width: 500px;">
+                        <input type="email" id="start-email" class="form-control bg-dark text-white border-0 opacity-75" placeholder="Email address" style="border-radius: 4px 0 0 4px;">
+                        <button class="btn btn-netflix px-4 fs-5" onclick="getStarted()">Get Started <i class="fas fa-chevron-right ms-2 small"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- User Dashboard Section -->
-    <div id="user-dashboard" class="container mt-4" style="display:none !important;">
+    <div id="user-dashboard" class="container mt-5 pt-5" style="display:none !important;">
         <div id="continue-watching-section" class="mb-5" style="display:none;">
-            <h2 class="mb-4 fw-bold border-start border-danger border-4 ps-3">Continue Watching</h2>
+            <h2 class="section-title mb-4">Continue Watching</h2>
             <div id="continue-watching-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 <!-- Loaded via JS -->
             </div>
         </div>
 
         <div class="row g-4 mb-5">
-            <div class="col-md-3">
-                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
-                    <div class="card-body">
-                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">My Profile</h4>
-                        <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Name</strong> <span id="dash-name" class="fs-5"></span></div>
-                        <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Email</strong> <span id="dash-email" class="fs-5 text-truncate d-block"></span></div>
-                        <div class="mb-0"><strong class="text-danger small text-uppercase d-block">Birth Date</strong> <span id="dash-dob" class="fs-5"></span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
-                    <div class="card-body">
-                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">Subscription</h4>
-                        <div id="dash-sub-details">
-                            <p class="text-secondary small italic py-3">No active subscription.</p>
-                            <a href="/subscription" class="btn btn-danger btn-sm w-100 fw-bold">Upgrade Now</a>
+            <div class="col-lg-3">
+                <div class="card glass-card text-white h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 text-uppercase small opacity-50">Profile</h5>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-danger rounded-circle p-3 me-3"><i class="fas fa-user fs-4"></i></div>
+                            <div>
+                                <h5 id="dash-name" class="mb-0 fw-bold"></h5>
+                                <p id="dash-email" class="small text-muted mb-0 text-truncate" style="max-width: 150px;"></p>
+                            </div>
+                        </div>
+                        <div class="small border-top border-secondary pt-3 mt-3">
+                            <span class="text-muted">Born:</span> <span id="dash-dob"></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
-                    <div class="card-body">
-                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">Recent Activity</h4>
-                        <div id="dash-watch-history" class="overflow-auto pe-2" style="max-height: 200px;"></div>
+            <div class="col-lg-3">
+                <div class="card glass-card text-white h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 text-uppercase small opacity-50">Subscription</h5>
+                        <div id="dash-sub-details">
+                            <div class="text-center py-4">
+                                <p class="text-muted small">No active plan found.</p>
+                                <a href="/subscription" class="btn btn-netflix btn-sm w-100">Browse Plans</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
-                    <div class="card-body">
-                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">My Reviews</h4>
-                        <div id="dash-review-history" class="overflow-auto pe-2" style="max-height: 200px;"></div>
+            <div class="col-lg-6">
+                <div class="card glass-card text-white h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 text-uppercase small opacity-50">Quick Activity</h5>
+                        <div class="row">
+                            <div class="col-md-6 border-end border-secondary">
+                                <p class="small text-muted mb-2">Recent Watches</p>
+                                <div id="dash-watch-history" class="overflow-auto" style="max-height: 150px;"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="small text-muted mb-2">Your Reviews</p>
+                                <div id="dash-review-history" class="overflow-auto" style="max-height: 150px;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <main class="container my-5">
+    <main class="container py-5">
         <div id="movies-section" class="mb-5">
-            <h2 class="mb-4 fw-bold border-start border-primary border-4 ps-3">Blockbuster Movies</h2>
-            <div id="movies-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <h2 class="section-title">Blockbuster Movies</h2>
+            <div id="movies-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
                 <!-- Loaded via JS -->
             </div>
         </div>
 
         <div id="series-section" class="mb-5">
-            <h2 class="mb-4 fw-bold border-start border-warning border-4 ps-3">Top Series</h2>
-            <div id="series-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <h2 class="section-title">Must-Watch Series</h2>
+            <div id="series-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
                 <!-- Loaded via JS -->
             </div>
         </div>
     </main>
 
-    <footer class="py-5 bg-black text-center mt-auto border-top border-secondary">
-        <p class="text-secondary small">&copy; 2026 OTT Streaming Platform. DBMS Project.</p>
+    <footer class="py-5 bg-black text-center mt-auto border-top border-secondary opacity-50">
+        <div class="container">
+            <div class="mb-4">
+                <a href="#" class="text-white mx-3 text-decoration-none small">Audio Description</a>
+                <a href="#" class="text-white mx-3 text-decoration-none small">Help Center</a>
+                <a href="#" class="text-white mx-3 text-decoration-none small">Gift Cards</a>
+                <a href="#" class="text-white mx-3 text-decoration-none small">Terms of Use</a>
+            </div>
+            <p class="small mb-0">&copy; 2026 OTT Streaming Platform. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.getElementById('mainNav').classList.add('scrolled');
+            } else {
+                document.getElementById('mainNav').classList.remove('scrolled');
+            }
+        });
+
         async function checkAuth() {
             const token = localStorage.getItem('token');
             const firstName = localStorage.getItem('first_name');
@@ -149,10 +181,15 @@
                         const subDetails = document.getElementById('dash-sub-details');
                         if (data.Subscription) {
                             subDetails.innerHTML = `
-                                <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Plan</strong> <span class="fs-5">${data.Subscription.PlanName}</span></div>
-                                <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Status</strong> <span class="badge bg-success">${data.Subscription.Status}</span></div>
-                                <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Started</strong> <span class="small">${data.Subscription.StartDate}</span></div>
-                                <div class="mb-0 small text-secondary">Max Screens: ${data.Subscription.MaxScreens}</div>
+                                <div class="mb-3">
+                                    <span class="badge bg-danger rounded-0 mb-2">${data.Subscription.PlanName}</span>
+                                    <h4 class="fw-bold mb-0">${data.Subscription.Status}</h4>
+                                </div>
+                                <div class="small text-muted mb-3">
+                                    <i class="far fa-calendar-alt me-1"></i> Since ${data.Subscription.StartDate}<br>
+                                    <i class="fas fa-desktop me-1"></i> ${data.Subscription.MaxScreens} Screens
+                                </div>
+                                <a href="/subscription" class="btn btn-outline-light btn-sm w-100 rounded-0">Manage Plan</a>
                             `;
                         }
 
@@ -163,15 +200,18 @@
                             cwSection.style.display = 'block';
                             cwGrid.innerHTML = data.ContinueWatching.map(item => `
                                 <div class="col">
-                                    <div class="card bg-black text-white h-100 border-0 shadow-sm">
-                                        <div class="card-body p-3">
-                                            <h6 class="card-title fw-bold mb-3 text-truncate">${item.Title}</h6>
-                                            <div class="progress bg-secondary" style="height: 6px;">
+                                    <div class="poster-card shadow-sm">
+                                        <div class="poster-img" style="aspect-ratio: 16/9; font-size: 1.5rem;">
+                                            <i class="fas fa-play text-white opacity-50"></i>
+                                        </div>
+                                        <div class="card-details p-3">
+                                            <h6 class="fw-bold mb-2 text-truncate small">${item.Title}</h6>
+                                            <div class="progress bg-secondary" style="height: 3px;">
                                                 <div class="progress-bar bg-danger" role="progressbar" style="width: ${item.Percent}%"></div>
                                             </div>
-                                            <div class="d-flex justify-content-between mt-2 smaller text-secondary" style="font-size: 0.75rem;">
+                                            <div class="d-flex justify-content-between mt-2 smaller opacity-75" style="font-size: 0.7rem;">
                                                 <span>${item.Percent}% watched</span>
-                                                <a href="/content/${item.ContentID}" class="text-danger text-decoration-none fw-bold">Resume &gt;</a>
+                                                <a href="/content/${item.ContentID}" class="text-danger text-decoration-none fw-bold">Resume <i class="fas fa-chevron-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -184,28 +224,28 @@
                         const watchGrid = document.getElementById('dash-watch-history');
                         if (data.WatchHistory.length > 0) {
                             watchGrid.innerHTML = data.WatchHistory.map(w => `
-                                <div class="mb-2 p-2 border-start border-danger border-2 bg-dark rounded-end small shadow-sm">
+                                <div class="mb-2 p-2 bg-dark rounded small">
                                     <div class="fw-bold text-truncate">${w.Title}</div>
-                                    <div class="text-secondary smaller" style="font-size: 0.75rem;">${w.Date}</div>
+                                    <div class="text-muted smaller" style="font-size: 0.65rem;">${w.Date}</div>
                                 </div>
                             `).join('');
                         } else {
-                            watchGrid.innerHTML = '<p class="text-secondary small italic text-center py-3">No watch history yet.</p>';
+                            watchGrid.innerHTML = '<p class="text-muted small italic py-3 text-center">No history.</p>';
                         }
 
                         const reviewGrid = document.getElementById('dash-review-history');
                         if (data.ReviewHistory.length > 0) {
                             reviewGrid.innerHTML = data.ReviewHistory.map(r => `
-                                <div class="mb-2 p-2 border-start border-warning border-2 bg-dark rounded-end small shadow-sm">
+                                <div class="mb-2 p-2 bg-dark rounded small">
                                     <div class="d-flex justify-content-between fw-bold">
-                                        <span class="text-truncate me-2">${r.Title}</span>
+                                        <span class="text-truncate me-2" style="max-width: 80px;">${r.Title}</span>
                                         <span class="text-warning">★${r.Score}</span>
                                     </div>
-                                    <div class="text-secondary smaller opacity-75 text-truncate">${r.Comment || 'No comment'}</div>
+                                    <div class="text-muted smaller text-truncate" style="font-size: 0.65rem;">${r.Comment || 'No comment'}</div>
                                 </div>
                             `).join('');
                         } else {
-                            reviewGrid.innerHTML = '<p class="text-secondary small italic text-center py-3">No reviews submitted.</p>';
+                            reviewGrid.innerHTML = '<p class="text-muted small italic py-3 text-center">No reviews.</p>';
                         }
                     } else {
                         logout();
@@ -240,17 +280,23 @@
                 
                 const cardTemplate = (c) => `
                     <div class="col">
-                        <div class="card bg-secondary text-white h-100 shadow-lg border-0 hover-zoom">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold text-truncate">${c.Title}</h5>
-                                <p class="card-text mb-4">
-                                    <span class="badge bg-warning text-dark">★ ${c.Rating}</span>
-                                    <span class="badge bg-danger ms-1">${c.Content_Type}</span>
-                                    <span class="ms-1 small text-light opacity-75">${c.Release_Year}</span>
-                                </p>
-                                <a href="/content/${c.ContentID}" class="btn btn-light mt-auto fw-bold">Watch Now</a>
+                        <a href="/content/${c.ContentID}" class="text-decoration-none text-white">
+                            <div class="poster-card h-100">
+                                <div class="poster-img">
+                                    <i class="fas fa-clapperboard opacity-10"></i>
+                                    <div class="position-absolute bottom-0 start-0 p-3 w-100">
+                                        <span class="badge bg-danger rounded-1 mb-1">${c.Content_Type}</span>
+                                        <h6 class="fw-bold mb-0 text-truncate">${c.Title}</h6>
+                                    </div>
+                                </div>
+                                <div class="card-details">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="rating-badge"><i class="fas fa-star me-1"></i>${c.Rating}</span>
+                                        <span class="text-muted smaller">${c.Release_Year}</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 `;
 

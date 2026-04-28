@@ -1,32 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800&display=swap');
+
+:root {
+    --primary-red: #E50914;
+    --dark-bg: #000000;
+    --card-bg: #141414;
+    --text-white: #FFFFFF;
+    --text-muted: #B3B3B3;
+    --glass-bg: rgba(0, 0, 0, 0.6);
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    overflow-x: hidden;
 }
 
-.bg-black {
-    background-color: #000000;
+h1, h2, h3, .navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.bg-gradient {
-    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(33,37,41,1) 100%);
+/* Navbar Modernization */
+.navbar {
+    transition: var(--transition-smooth);
+    padding: 1.2rem 0;
 }
 
-.card {
-    transition: transform 0.3s ease;
+.navbar.scrolled {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 0;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--primary-red) !important;
+}
+
+/* Hero Section Enhancement */
+.hero-gradient {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%);
+    height: 100%;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin-top: 5rem;
+}
+
+.btn-netflix {
+    background-color: var(--primary-red);
+    color: white;
+    border-radius: 4px;
+    padding: 12px 30px;
+    font-weight: 600;
     border: none;
+    transition: var(--transition-smooth);
 }
 
-.card:hover {
-    transform: scale(1.05);
-    z-index: 10;
-    cursor: pointer;
-}
-
-.btn-danger {
-    background-color: #e50914;
-    border-color: #e50914;
-}
-
-.btn-danger:hover {
+.btn-netflix:hover {
     background-color: #b2070f;
-    border-color: #b2070f;
+    transform: scale(1.05);
+}
+
+/* Content Cards (Poster Style) */
+.poster-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(255,255,255,0.05);
+    height: 100%;
+}
+
+.poster-card:hover {
+    transform: scale(1.08);
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.poster-img {
+    aspect-ratio: 2/3;
+    background: #2a2a2a; /* Placeholder bg */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+}
+
+.poster-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+}
+
+.card-details {
+    padding: 1rem;
+}
+
+.rating-badge {
+    color: #ffc107;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Sections */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 15px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 5px;
+    width: 4px;
+    background-color: var(--primary-red);
+}
+
+/* Profile/Dashboard Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #E50914;
+}
+
+/* Auth Pages */
+.auth-bg {
+    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
 }
