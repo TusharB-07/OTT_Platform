@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Detail - OTT Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-dark text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-danger" href="/">OTT PLATFORM</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="/">Browse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subscription">Subscription</a></li>
+                    <li id="auth-links" class="d-flex align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-danger btn-sm ms-lg-3 px-3" href="/register">Register</a></li>
+                    </li>
+                    <li id="user-links" class="d-flex align-items-center" style="display:none !important;">
+                        <li class="nav-item"><span class="nav-link text-light me-2 small fw-bold" id="user-display"></span></li>
+                        <li class="nav-item"><button class="btn btn-outline-light btn-sm ms-lg-2" onclick="logout()">Logout</button></li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div id="content-detail" class="row">
+            <!-- Details will be loaded here -->
+        </div>
+
+        <div class="mt-5">
+            <h3>User Reviews</h3>
+            <div id="reviews-list" class="list-group bg-dark">
+                <!-- Reviews will be loaded here -->
+            </div>
+            
+            <div id="review-form-container" class="mt-4 p-4 border border-secondary rounded">
+                <h4>Leave a Review</h4>
+                <form id="reviewForm">
+                    <input type="hidden" id="watchId" name="WatchID">
+                    <div class="mb-3">
+                        <label class="form-label">Score (1-10)</label>
+                        <input type="number" step="0.1" min="1" max="10" name="Score" class="form-control bg-dark text-white" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Comment</label>
+                        <textarea name="Comment" class="form-control bg-dark text-white" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Submit Review</button>
+                </form>
+                <p id="watch-notice" class="text-warning mt-2 small" style="display:none;">You need to watch this content first to review it.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const contentId = window.location.pathname.split('/').pop();
+
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const firstName = localStorage.getItem('first_name');
+            const authLinks = document.getElementById('auth-links');
+            const userLinks = document.getElementById('user-links');
+            
+            if (token) {
+                if(authLinks) authLinks.style.setProperty('display', 'none', 'important');
+                if(userLinks) {
+                    userLinks.style.setProperty('display', 'flex', 'important');
+                    document.getElementById('user-display').textContent = `Hi, ${firstName || 'User'}!`;
+                }
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('first_name');
+            localStorage.removeItem('user_id');
+            window.location.href = '/';
+        }
+        
+        async function loadDetail() {
+            checkAuth();
+            const res = await fetch(`/api/content/${contentId}`);
+            const c = await res.json();
+            const detail = document.getElementById('content-detail');
+            
+            let extra = '';
+            if (c.Content_Type === 'Movie') {
+                extra = `<p><strong>Director:</strong> ${c.Director}</p>
+                         <p><strong>Cast:</strong> ${c.Cast}</p>`;
+            } else {
+                extra = `<p><strong>Seasons:</strong> ${c.Seasons}</p>
+                         <h6>Episodes:</h6>
+                         <ul class="list-group list-group-flush bg-dark mb-3">
+                            ${c.Episodes.map(e => `<li class="list-group-item bg-dark text-white border-secondary">S${e.Season} E${e.Number}: ${e.Title} (${e.Duration}m)</li>`).join('')}
+                         </ul>`;
+            }
+
+            detail.innerHTML = `
+                <div class="col-md-5">
+                    <div class="p-5 bg-secondary text-center rounded shadow-lg">
+                        <h1 class="display-1">🎬</h1>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <h1 class="display-4 fw-bold">${c.Title}</h1>
+                    <p class="lead mb-4">
+                        <span class="badge bg-warning text-dark">★ ${c.Rating}</span>
+                        <span class="badge bg-danger ms-1">${c.Content_Type}</span>
+                        <span class="ms-2 text-secondary">${c.Release_Year} | ${c.Duration} mins</span>
+                    </p>
+                    <p class="mb-1"><strong>Genres:</strong> <span class="text-info">${c.Genres.join(', ')}</span></p>
+                    <p class="mb-4"><strong>Languages:</strong> <span class="text-info">${c.Languages.join(', ')}</span></p>
+                    <div class="card bg-black border-secondary mb-4">
+                        <div class="card-body">
+                            ${extra}
+                        </div>
+                    </div>
+                    <button onclick="startWatching()" class="btn btn-danger btn-lg px-5 fw-bold shadow">Watch Now</button>
+                </div>
+            `;
+
+            const reviewsList = document.getElementById('reviews-list');
+            if (c.Reviews && c.Reviews.length > 0) {
+                reviewsList.innerHTML = c.Reviews.map(r => `
+                    <div class="list-group-item bg-dark text-white border-secondary mb-2 rounded">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 fw-bold">${r.User}</h6>
+                            <span class="badge bg-warning text-dark">★ ${r.Score}</span>
+                        </div>
+                        <p class="mb-1 small opacity-75">${r.Comment}</p>
+                        <small class="text-secondary">${r.Date}</small>
+                    </div>
+                `).join('');
+            } else {
+                reviewsList.innerHTML = '<p class="text-secondary italic">No reviews yet. Be the first to review!</p>';
+            }
+        }
+
+        async function startWatching() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please login to watch!');
+                window.location.href = '/login';
+                return;
+            }
+
+            const res = await fetch('/api/watches', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify({ ContentID: contentId })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                document.getElementById('watchId').value = data.WatchID;
+                document.getElementById('watch-notice').style.display = 'none';
+                alert('Enjoy watching! The review form below is now active.');
+            } else {
+                alert('Error starting watch session');
+            }
+        }
+
+        document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('token');
+            const watchId = document.getElementById('watchId').value;
+            
+            if (!watchId) {
+                document.getElementById('watch-notice').style.display = 'block';
+                return;
+            }
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            data.WatchID = watchId;
+
+            const res = await fetch('/api/reviews', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (res.ok) {
+                alert('Review submitted! Content rating updated.');
+                e.target.reset();
+                document.getElementById('watchId').value = ''; 
+                loadDetail();
+            } else {
+                const err = await res.json();
+                alert(err.message);
+            }
+        });
+
+        loadDetail();
+    </script>
+</body>
+</html>

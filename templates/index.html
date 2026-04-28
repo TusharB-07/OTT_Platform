@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT Streaming Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-danger" href="/">OTT PLATFORM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="/">Browse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subscription">Subscription</a></li>
+                    
+                    <!-- Guest Links -->
+                    <li class="nav-item guest-link"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item guest-link"><a class="nav-link btn btn-danger btn-sm ms-lg-3 px-3" href="/register">Register</a></li>
+                    
+                    <!-- User Links -->
+                    <li class="nav-item user-link d-none">
+                        <span class="nav-link text-light me-2 small fw-bold" id="user-display"></span>
+                    </li>
+                    <li class="nav-item user-link d-none">
+                        <button class="btn btn-outline-light btn-sm ms-lg-2" onclick="logout()">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="hero-section" class="py-5 text-center bg-dark position-relative overflow-hidden" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+        <div class="container py-5">
+            <h1 class="display-3 fw-bold mb-3">Unlimited Movies, TV <br>Shows, and More.</h1>
+            <p class="lead mb-4 fs-4">Watch anywhere. Cancel anytime.</p>
+            <div class="mt-4 justify-content-center d-flex gap-2">
+                <input type="email" id="start-email" class="form-control form-control-lg w-auto border-0" placeholder="Email address">
+                <button class="btn btn-danger btn-lg px-4 fw-bold" onclick="getStarted()">Get Started &gt;</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- User Dashboard Section -->
+    <div id="user-dashboard" class="container mt-4" style="display:none !important;">
+        <div id="continue-watching-section" class="mb-5" style="display:none;">
+            <h2 class="mb-4 fw-bold border-start border-danger border-4 ps-3">Continue Watching</h2>
+            <div id="continue-watching-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                <!-- Loaded via JS -->
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
+                    <div class="card-body">
+                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">My Profile</h4>
+                        <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Name</strong> <span id="dash-name" class="fs-5"></span></div>
+                        <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Email</strong> <span id="dash-email" class="fs-5 text-truncate d-block"></span></div>
+                        <div class="mb-0"><strong class="text-danger small text-uppercase d-block">Birth Date</strong> <span id="dash-dob" class="fs-5"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
+                    <div class="card-body">
+                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">Subscription</h4>
+                        <div id="dash-sub-details">
+                            <p class="text-secondary small italic py-3">No active subscription.</p>
+                            <a href="/subscription" class="btn btn-danger btn-sm w-100 fw-bold">Upgrade Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
+                    <div class="card-body">
+                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">Recent Activity</h4>
+                        <div id="dash-watch-history" class="overflow-auto pe-2" style="max-height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-secondary text-white border-0 shadow-lg h-100">
+                    <div class="card-body">
+                        <h4 class="fw-bold border-bottom border-danger pb-2 mb-3">My Reviews</h4>
+                        <div id="dash-review-history" class="overflow-auto pe-2" style="max-height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container my-5">
+        <div id="movies-section" class="mb-5">
+            <h2 class="mb-4 fw-bold border-start border-primary border-4 ps-3">Blockbuster Movies</h2>
+            <div id="movies-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <!-- Loaded via JS -->
+            </div>
+        </div>
+
+        <div id="series-section" class="mb-5">
+            <h2 class="mb-4 fw-bold border-start border-warning border-4 ps-3">Top Series</h2>
+            <div id="series-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <!-- Loaded via JS -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-5 bg-black text-center mt-auto border-top border-secondary">
+        <p class="text-secondary small">&copy; 2026 OTT Streaming Platform. DBMS Project.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function checkAuth() {
+            const token = localStorage.getItem('token');
+            const firstName = localStorage.getItem('first_name');
+            const guestLinks = document.querySelectorAll('.guest-link');
+            const userLinks = document.querySelectorAll('.user-link');
+            const dashboard = document.getElementById('user-dashboard');
+            const hero = document.getElementById('hero-section');
+            
+            if (token) {
+                guestLinks.forEach(el => el.classList.add('d-none'));
+                userLinks.forEach(el => el.classList.remove('d-none'));
+                hero.style.display = 'none';
+                document.getElementById('user-display').textContent = `Hi, ${firstName || 'User'}!`;
+                
+                try {
+                    const res = await fetch('/api/user/profile', {
+                        headers: { 'Authorization': token }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        dashboard.style.setProperty('display', 'block', 'important');
+                        
+                        document.getElementById('user-display').textContent = `Hi, ${data.FirstName}!`;
+                        document.getElementById('dash-name').textContent = `${data.FirstName} ${data.LastName}`;
+                        document.getElementById('dash-email').textContent = data.Email;
+                        document.getElementById('dash-dob').textContent = data.DOB;
+
+                        // Subscription Details
+                        const subDetails = document.getElementById('dash-sub-details');
+                        if (data.Subscription) {
+                            subDetails.innerHTML = `
+                                <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Plan</strong> <span class="fs-5">${data.Subscription.PlanName}</span></div>
+                                <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Status</strong> <span class="badge bg-success">${data.Subscription.Status}</span></div>
+                                <div class="mb-2"><strong class="text-danger small text-uppercase d-block">Started</strong> <span class="small">${data.Subscription.StartDate}</span></div>
+                                <div class="mb-0 small text-secondary">Max Screens: ${data.Subscription.MaxScreens}</div>
+                            `;
+                        }
+
+                        // Continue Watching
+                        const cwSection = document.getElementById('continue-watching-section');
+                        const cwGrid = document.getElementById('continue-watching-grid');
+                        if (data.ContinueWatching && data.ContinueWatching.length > 0) {
+                            cwSection.style.display = 'block';
+                            cwGrid.innerHTML = data.ContinueWatching.map(item => `
+                                <div class="col">
+                                    <div class="card bg-black text-white h-100 border-0 shadow-sm">
+                                        <div class="card-body p-3">
+                                            <h6 class="card-title fw-bold mb-3 text-truncate">${item.Title}</h6>
+                                            <div class="progress bg-secondary" style="height: 6px;">
+                                                <div class="progress-bar bg-danger" role="progressbar" style="width: ${item.Percent}%"></div>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-2 smaller text-secondary" style="font-size: 0.75rem;">
+                                                <span>${item.Percent}% watched</span>
+                                                <a href="/content/${item.ContentID}" class="text-danger text-decoration-none fw-bold">Resume &gt;</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('');
+                        } else {
+                            cwSection.style.display = 'none';
+                        }
+
+                        const watchGrid = document.getElementById('dash-watch-history');
+                        if (data.WatchHistory.length > 0) {
+                            watchGrid.innerHTML = data.WatchHistory.map(w => `
+                                <div class="mb-2 p-2 border-start border-danger border-2 bg-dark rounded-end small shadow-sm">
+                                    <div class="fw-bold text-truncate">${w.Title}</div>
+                                    <div class="text-secondary smaller" style="font-size: 0.75rem;">${w.Date}</div>
+                                </div>
+                            `).join('');
+                        } else {
+                            watchGrid.innerHTML = '<p class="text-secondary small italic text-center py-3">No watch history yet.</p>';
+                        }
+
+                        const reviewGrid = document.getElementById('dash-review-history');
+                        if (data.ReviewHistory.length > 0) {
+                            reviewGrid.innerHTML = data.ReviewHistory.map(r => `
+                                <div class="mb-2 p-2 border-start border-warning border-2 bg-dark rounded-end small shadow-sm">
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span class="text-truncate me-2">${r.Title}</span>
+                                        <span class="text-warning">★${r.Score}</span>
+                                    </div>
+                                    <div class="text-secondary smaller opacity-75 text-truncate">${r.Comment || 'No comment'}</div>
+                                </div>
+                            `).join('');
+                        } else {
+                            reviewGrid.innerHTML = '<p class="text-secondary small italic text-center py-3">No reviews submitted.</p>';
+                        }
+                    } else {
+                        logout();
+                    }
+                } catch (err) {
+                    console.error('Error fetching profile:', err);
+                }
+            } else {
+                hero.style.display = 'block';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('first_name');
+            window.location.reload();
+        }
+
+        function getStarted() {
+            const email = document.getElementById('start-email').value;
+            window.location.href = `/register?email=${encodeURIComponent(email)}`;
+        }
+
+        async function loadContent() {
+            try {
+                const response = await fetch('/api/content');
+                const data = await response.json();
+                
+                const moviesGrid = document.getElementById('movies-grid');
+                const seriesGrid = document.getElementById('series-grid');
+                
+                const cardTemplate = (c) => `
+                    <div class="col">
+                        <div class="card bg-secondary text-white h-100 shadow-lg border-0 hover-zoom">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title fw-bold text-truncate">${c.Title}</h5>
+                                <p class="card-text mb-4">
+                                    <span class="badge bg-warning text-dark">★ ${c.Rating}</span>
+                                    <span class="badge bg-danger ms-1">${c.Content_Type}</span>
+                                    <span class="ms-1 small text-light opacity-75">${c.Release_Year}</span>
+                                </p>
+                                <a href="/content/${c.ContentID}" class="btn btn-light mt-auto fw-bold">Watch Now</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                moviesGrid.innerHTML = data.content
+                    .filter(c => c.Content_Type === 'Movie')
+                    .map(cardTemplate).join('');
+
+                seriesGrid.innerHTML = data.content
+                    .filter(c => c.Content_Type === 'Series')
+                    .map(cardTemplate).join('');
+
+            } catch (err) {
+                console.error('Error loading content:', err);
+            }
+        }
+        
+        checkAuth();
+        loadContent();
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bg-black {
+    background-color: #000000;
+}
+
+.bg-gradient {
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(33,37,41,1) 100%);
+}
+
+.card {
+    transition: transform 0.3s ease;
+    border: none;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #e50914;
+    border-color: #e50914;
+}
+
+.btn-danger:hover {
+    background-color: #b2070f;
+    border-color: #b2070f;
+}
