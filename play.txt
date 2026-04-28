@@ -1,0 +1,32 @@
+Type,Title,IMDb_Link,Play_Link
+Movie,Inception,https://www.imdb.com/title/tt1375666/,https://www.playimdb.com/title/tt1375666/
+Movie,The Dark Knight,https://www.imdb.com/title/tt0468569/,https://www.playimdb.com/title/tt0468569/
+Movie,Interstellar,https://www.imdb.com/title/tt0816692/,https://www.playimdb.com/title/tt0816692/
+Movie,Titanic,https://www.imdb.com/title/tt0120338/,https://www.playimdb.com/title/tt0120338/
+Movie,Avatar,https://www.imdb.com/title/tt0499549/,https://www.playimdb.com/title/tt0499549/
+Movie,Avengers: Endgame,https://www.imdb.com/title/tt4154796/,https://www.playimdb.com/title/tt4154796/
+Movie,Joker,https://www.imdb.com/title/tt7286456/,https://www.playimdb.com/title/tt7286456/
+Movie,The Matrix,https://www.imdb.com/title/tt0133093/,https://www.playimdb.com/title/tt0133093/
+Movie,Gladiator,https://www.imdb.com/title/tt0172495/,https://www.playimdb.com/title/tt0172495/
+Movie,Forrest Gump,https://www.imdb.com/title/tt0109830/,https://www.playimdb.com/title/tt0109830/
+Movie,The Shawshank Redemption,https://www.imdb.com/title/tt0111161/,https://www.playimdb.com/title/tt0111161/
+Movie,The Godfather,https://www.imdb.com/title/tt0068646/,https://www.playimdb.com/title/tt0068646/
+Movie,Pulp Fiction,https://www.imdb.com/title/tt0110912/,https://www.playimdb.com/title/tt0110912/
+Movie,Fight Club,https://www.imdb.com/title/tt0137523/,https://www.playimdb.com/title/tt0137523/
+Movie,Parasite,https://www.imdb.com/title/tt6751668/,https://www.playimdb.com/title/tt6751668/
+Movie,Whiplash,https://www.imdb.com/title/tt2582802/,https://www.playimdb.com/title/tt2582802/
+Movie,La La Land,https://www.imdb.com/title/tt3783958/,https://www.playimdb.com/title/tt3783958/
+Movie,The Lion King,https://www.imdb.com/title/tt0110357/,https://www.playimdb.com/title/tt0110357/
+Movie,Frozen,https://www.imdb.com/title/tt2294629/,https://www.playimdb.com/title/tt2294629/
+Movie,Toy Story,https://www.imdb.com/title/tt0114709/,https://www.playimdb.com/title/tt0114709/
+
+Series,Breaking Bad,https://www.imdb.com/title/tt0903747/,https://www.playimdb.com/title/tt0903747/
+Series,Game of Thrones,https://www.imdb.com/title/tt0944947/,https://www.playimdb.com/title/tt0944947/
+Series,Stranger Things,https://www.imdb.com/title/tt4574334/,https://www.playimdb.com/title/tt4574334/
+Series,Money Heist,https://www.imdb.com/title/tt6468322/,https://www.playimdb.com/title/tt6468322/
+Series,The Office,https://www.imdb.com/title/tt0386676/,https://www.playimdb.com/title/tt0386676/
+Series,Friends,https://www.imdb.com/title/tt0108778/,https://www.playimdb.com/title/tt0108778/
+Series,Sherlock,https://www.imdb.com/title/tt1475582/,https://www.playimdb.com/title/tt1475582/
+Series,Dark,https://www.imdb.com/title/tt5753856/,https://www.playimdb.com/title/tt5753856/
+Series,The Boys,https://www.imdb.com/title/tt1190634/,https://www.playimdb.com/title/tt1190634/
+Series,Loki,https://www.imdb.com/title/tt9140554/,https://www.playimdb.com/title/tt9140554/

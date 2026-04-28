@@ -35,6 +35,8 @@ class Content(db.Model):
     Release_Year = db.Column(db.Integer, nullable=False)
     Rating = db.Column(db.Numeric(3, 1), default=0.0)
     Content_Type = db.Column(db.Enum('Movie', 'Series'), nullable=False)
+    IMDb_Link = db.Column(db.String(500))
+    Play_Link = db.Column(db.String(500))
 
     languages = db.relationship('ContentLanguage', backref='content', cascade='all, delete-orphan')
     genres = db.relationship('Genre', secondary='Content_Genre', backref='contents')

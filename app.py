@@ -122,6 +122,8 @@ def get_content_detail(id):
         'Rating': float(c.Rating),
         'Content_Type': c.Content_Type,
         'Thumbnail': get_thumbnail(c.Title),
+        'IMDb_Link': c.IMDb_Link,
+        'Play_Link': c.Play_Link,
         'Genres': [g.Genre_Name for g in c.genres],
         'Languages': [l.Language for l in c.languages],
         'Reviews': [{

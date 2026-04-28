@@ -41,7 +41,9 @@ CREATE TABLE Content (
     Duration INT COMMENT 'Total Duration in Minutes',
     Release_Year YEAR NOT NULL,
     Rating DECIMAL(3,1) DEFAULT 0.0 CHECK (Rating >= 0 AND Rating <= 10),
-    Content_Type ENUM('Movie', 'Series') NOT NULL
+    Content_Type ENUM('Movie', 'Series') NOT NULL,
+    IMDb_Link VARCHAR(500),
+    Play_Link VARCHAR(500)
 );
 
 -- 2.1 ISA: Movie Subtype
