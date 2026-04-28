@@ -201,8 +201,8 @@
                             cwGrid.innerHTML = data.ContinueWatching.map(item => `
                                 <div class="col">
                                     <div class="poster-card shadow-sm">
-                                        <div class="poster-img" style="aspect-ratio: 16/9; font-size: 1.5rem;">
-                                            <i class="fas fa-play text-white opacity-50"></i>
+                                        <div class="poster-img" style="aspect-ratio: 16/9; font-size: 1.5rem; background: url('${item.Thumbnail || ''}'); background-size: cover; background-position: center;">
+                                            ${!item.Thumbnail ? '<i class="fas fa-play text-white opacity-50"></i>' : ''}
                                         </div>
                                         <div class="card-details p-3">
                                             <h6 class="fw-bold mb-2 text-truncate small">${item.Title}</h6>
@@ -282,8 +282,8 @@
                     <div class="col">
                         <a href="/content/${c.ContentID}" class="text-decoration-none text-white">
                             <div class="poster-card h-100">
-                                <div class="poster-img">
-                                    <i class="fas fa-clapperboard opacity-10"></i>
+                                <div class="poster-img" style="background: url('${c.Thumbnail || ''}'); background-size: cover; background-position: center;">
+                                    ${!c.Thumbnail ? '<i class="fas fa-clapperboard opacity-10"></i>' : ''}
                                     <div class="position-absolute bottom-0 start-0 p-3 w-100">
                                         <span class="badge bg-danger rounded-1 mb-1">${c.Content_Type}</span>
                                         <h6 class="fw-bold mb-0 text-truncate">${c.Title}</h6>

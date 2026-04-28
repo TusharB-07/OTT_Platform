@@ -104,6 +104,12 @@
             checkAuth();
             const res = await fetch(`/api/content/${contentId}`);
             const c = await res.json();
+            
+            // Update hero background if thumbnail exists
+            if (c.Thumbnail) {
+                document.getElementById('content-hero').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('${c.Thumbnail}')`;
+            }
+
             const detail = document.getElementById('content-detail');
             
             let extra = '';
@@ -134,8 +140,8 @@
             detail.innerHTML = `
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="poster-card" style="max-width: 350px; margin: auto;">
-                        <div class="poster-img" style="aspect-ratio: 2/3; font-size: 5rem;">
-                            <i class="fas fa-play text-white opacity-25"></i>
+                        <div class="poster-img" style="aspect-ratio: 2/3; font-size: 5rem; background: url('${c.Thumbnail || ''}'); background-size: cover; background-position: center;">
+                            ${!c.Thumbnail ? '<i class="fas fa-play text-white opacity-25"></i>' : ''}
                         </div>
                     </div>
                 </div>

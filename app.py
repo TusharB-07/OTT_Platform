@@ -7,6 +7,8 @@ import jwt
 import datetime
 from functools import wraps
 
+import os
+
 app = Flask(__name__)
 # Using pymysql as a pure-python driver for Python 3.14 compatibility
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:tusharroot@localhost/ott_platform'
@@ -15,6 +17,15 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 
 CORS(app)
 db.init_app(app)
+
+# Helper for thumbnails
+def get_thumbnail(title):
+    safe_title = title.replace(':', '-')
+    extensions = ['.jpeg', '.jpg', '.png', '.webp']
+    for ext in extensions:
+        if os.path.exists(os.path.join('static', 'thumbnails', f'{safe_title}{ext}')):
+            return f'/static/thumbnails/{safe_title}{ext}'
+    return None
 
 # Helper for JWT Auth
 def token_required(f):
@@ -90,7 +101,8 @@ def get_content():
             'Title': c.Title,
             'Rating': float(c.Rating),
             'Content_Type': c.Content_Type,
-            'Release_Year': c.Release_Year
+            'Release_Year': c.Release_Year,
+            'Thumbnail': get_thumbnail(c.Title)
         }
         output.append(content_data)
     return jsonify({'content': output})
@@ -109,6 +121,7 @@ def get_content_detail(id):
         'Release_Year': c.Release_Year,
         'Rating': float(c.Rating),
         'Content_Type': c.Content_Type,
+        'Thumbnail': get_thumbnail(c.Title),
         'Genres': [g.Genre_Name for g in c.genres],
         'Languages': [l.Language for l in c.languages],
         'Reviews': [{
@@ -175,7 +188,8 @@ def get_user_profile(current_user):
                     'Title': w.content.Title,
                     'Progress': w.Watch_Duration,
                     'Total': w.content.Duration,
-                    'Percent': round((w.Watch_Duration / w.content.Duration) * 100) if w.content.Duration > 0 else 0
+                    'Percent': round((w.Watch_Duration / w.content.Duration) * 100) if w.content.Duration > 0 else 0,
+                    'Thumbnail': get_thumbnail(w.content.Title)
                 }
     
     return jsonify({
